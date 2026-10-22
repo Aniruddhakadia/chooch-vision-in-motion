@@ -270,12 +270,35 @@ function hideOverlays() {
   if (finishedOverlay) finishedOverlay.hidden = true;
 }
 
+let userExplicitlyMuted = false;
+
 // Playback logic
 async function playFilm() {
   hideOverlays();
+
+  // Voice on by default when video plays
+  if (!userExplicitlyMuted && (video.muted || video.volume === 0)) {
+    video.muted = false;
+    if (video.volume === 0) {
+      video.volume = 0.8;
+      if (volumeSlider) volumeSlider.value = 80;
+    }
+    syncVoiceState();
+  }
+
   try {
     await video.play();
   } catch (err) {
+    if (err.name === 'NotAllowedError' && !video.muted) {
+      try {
+        video.muted = true;
+        syncVoiceState();
+        await video.play();
+        return;
+      } catch (fallbackErr) {
+        // Fall back
+      }
+    }
     if (bigPlayBtn) bigPlayBtn.hidden = false;
     announceStatus('Press play to start the film.');
   }
@@ -298,6 +321,7 @@ function syncVoiceState() {
 
 function toggleVoice() {
   video.muted = !video.muted;
+  userExplicitlyMuted = video.muted;
   if (!video.muted && video.volume === 0) {
     video.volume = 0.8;
     volumeSlider.value = 80;
@@ -511,6 +535,7 @@ function initEvents() {
   volumeSlider.addEventListener('input', (e) => {
     video.volume = +e.target.value / 100;
     video.muted = video.volume === 0;
+    userExplicitlyMuted = video.muted;
     syncVoiceState();
   });
 
@@ -671,6 +696,12 @@ function initEvents() {
       shareStatus.textContent = currentUrl;
     }
   });
+
+  // Default voice on
+  video.muted = false;
+  video.volume = 0.8;
+  if (volumeSlider) volumeSlider.value = 80;
+  syncVoiceState();
 
   // Initialize explore bar in default state
   updateExploreBar(-1);
