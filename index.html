@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7944c4">
+
+  <title>Chooch — Vision in Motion | An Experience</title>
+  <meta name="description" content="Big Questions. A clearer view of what comes next. An interactive 2-minute 29-second Chooch AI healthcare inventory animated experience.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="chooch-logo.webp">
+
+  <!-- Social Metadata / OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chooch AI">
+  <meta property="og:title" content="Chooch · Vision in Motion — An Experience">
+  <meta property="og:description" content="Big Questions. A clearer view of what comes next. Watch the film and explore inventory questions at your own pace.">
+  <meta property="og:image" content="poster.jpg">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+
+  <!-- Twitter Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chooch · Vision in Motion">
+  <meta name="twitter:description" content="Big Questions. A clearer view of what comes next.">
+  <meta name="twitter:image" content="poster.jpg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Subtle Backdrop for Depth -->
+  <div class="ambient-backdrop" aria-hidden="true">
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+  </div>
+
+  <!-- Global Header -->
+  <header class="site-header">
+    <div class="brand-wrapper">
+      <a href="#" id="home" class="brand-logo" aria-label="Chooch Vision in Motion home">
+        <img src="chooch-logo.webp" alt="Chooch Logo" width="146" height="42">
+      </a>
+      <div class="brand-divider" aria-hidden="true"></div>
+      <div class="brand-meta">
+        VISION IN MOTION
+        <span class="brand-subtitle">HEALTHCARE / VISION AI</span>
+      </div>
+    </div>
+    <a class="download-link" href="Chooch_Vision_in_Motion.mp4" download="Chooch_Vision_in_Motion.mp4" title="Download MP4 video">
+      Download film <span class="download-icon" aria-hidden="true">↓</span>
+    </a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Intro Row -->
+    <section class="intro-section">
+      <div class="intro-headings">
+        <span class="eyebrow">VISION IN MOTION / AN EXPERIENCE</span>
+        <h1 class="main-title">
+          Big Questions.
+          <span class="main-subtitle">A clearer view of what comes next.</span>
+        </h1>
+      </div>
+      <p class="intro-desc">
+        See how Vision AI changes hospital inventory.<br>
+        Watch the film or choose the question on your mind.
+      </p>
+    </section>
+
+    <!-- Interactive Cinema / Video Player Card -->
+    <section class="cinema-card" aria-label="Chooch animated film experience">
+      <div class="video-wrapper">
+        <video 
+          id="film" 
+          poster="poster.jpg" 
+          playsinline 
+          muted 
+          preload="metadata"
+          aria-label="Vision in Motion film"
+        >
+          <source src="Chooch_Vision_in_Motion.mp4" type="video/mp4">
+          <track src="captions.vtt" kind="captions" srclang="en" label="English">
+          Your browser does not support HTML5 video.
+        </video>
+
+        <!-- Big Play Initial Overlay -->
+        <div id="big-play" class="big-play-overlay" role="button" tabindex="0" aria-label="Play full film">
+          <div class="play-action-cluster">
+            <span class="play-icon-circle" aria-hidden="true">▶</span>
+            <div class="play-labels">
+              <span class="play-primary-label">PLAY THE FILM</span>
+              <span class="play-secondary-label">02:29 · An Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Finished Overlay -->
+        <!-- <div id="finished" class="film-finish-overlay" hidden>
+          <h2 id="finish-title" class="finish-title">The right supplies. The right place. The right time.</h2>
+          <div class="finish-actions">
+            <button id="replay" class="finish-btn-primary">Replay film ↺</button>
+            <button id="continue" class="finish-btn-secondary" hidden>Continue full film →</button>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- Video Controls Toolbar -->
+      <div class="player-controls-container">
+        <div class="controls-toolbar">
+          <button id="play" class="control-btn play-toggle-btn" aria-label="Play film">▶</button>
+          <button id="restart" class="control-btn restart-btn" aria-label="Restart film" title="Restart film">↺</button>
+          
+          <div id="time" class="time-display" aria-live="off">
+            00:00 <span class="time-total">/ 02:29</span>
+          </div>
+
+          <div id="mode" class="mode-badge">FULL FILM</div>
+
+          <div class="toolbar-right">
+            <button id="voice" class="voice-pill" aria-pressed="false" aria-label="Enable voice narration">
+              ◖ Voice off
+            </button>
+            
+            <div class="pace-selector">
+              <span>Pace</span>
+              <select id="speed" class="pace-dropdown" aria-label="Playback speed">
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+              </select>
+            </div>
+
+            <button id="cc" class="cc-toggle" aria-pressed="false" aria-label="Toggle closed captions">
+              CC
+            </button>
+
+            <button id="fullscreen" class="control-btn fullscreen-btn" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+              ⛶
+            </button>
+          </div>
+        </div>
+
+        <!-- Seek Scrubber -->
+        <label class="scrub-container">
+          <span class="sr-only">Seek position slider</span>
+          <input 
+            id="seek" 
+            class="seek-slider" 
+            type="range" 
+            min="0" 
+            max="149" 
+            step="0.1" 
+            value="0" 
+            aria-label="Seek position"
+          >
+        </label>
+      </div>
+
+      <!-- Explore Bar -->
+      <div class="explore-bar">
+        <div class="answer-nav-buttons">
+          <button id="previous-answer" class="nav-arrow-btn" aria-label="Previous answer" disabled>←</button>
+          <button id="next-answer" class="nav-arrow-btn" aria-label="Next answer">→</button>
+        </div>
+
+        <span id="explore-label" class="explore-title">Explore an answer</span>
+
+        <div id="step-buttons" class="step-buttons-container"></div>
+
+        <button 
+          id="voice-settings-toggle" 
+          class="listening-options-toggle" 
+          aria-expanded="false" 
+          aria-controls="voice-settings"
+        >
+          Listening options
+        </button>
+      </div>
+
+      <!-- Listening Options Collapsible Drawer -->
+      <div id="voice-settings" class="listening-options-panel" hidden>
+        <div class="volume-control-wrap">
+          <label for="volume">Voice volume</label>
+          <input id="volume" class="volume-slider" type="range" min="0" max="100" value="80">
+        </div>
+        <p class="listening-info-text">
+          Narration follows the animation as you explore. Turn Voice on to listen; the downloadable film includes full narration audio.
+        </p>
+      </div>
+    </section>
+
+    <!-- Follow Your Curiosity / Question Grid -->
+    <section class="questions-section" aria-labelledby="questions-heading">
+      <div class="section-header-row">
+        <div>
+          <span class="eyebrow">FOLLOW YOUR CURIOSITY</span>
+          <h2 id="questions-heading" class="section-heading">What’s on your mind?</h2>
+        </div>
+        <button id="full-film" class="watch-full-btn">
+          Watch the full film <span>↗</span>
+        </button>
+      </div>
+
+      <div id="question-grid" class="questions-grid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
+      <p class="grid-subtext">
+        Explore a question or jump to a moment. The complete film runs 2 minutes 29 seconds.
+      </p>
+    </section>
+
+    <!-- Answer Detail Expansion Panel -->
+    <section id="answer-detail" class="answer-detail-panel" hidden aria-labelledby="detail-title">
+      <div class="detail-top-row">
+        <span id="detail-code" class="detail-category"></span>
+        <button id="close-detail" class="detail-close-btn" aria-label="Close answer details">✕</button>
+      </div>
+      <h3 id="detail-title" class="detail-main-question"></h3>
+      <div id="detail-rhetoric" class="detail-rhetoric-title"></div>
+
+      <div id="answer-points" class="answer-beats-grid"></div>
+
+      <details class="detail-transcript-accordion">
+        <summary class="detail-transcript-summary">Read this answer</summary>
+        <div id="original-answer" class="detail-transcript-body"></div>
+      </details>
+    </section>
+
+    <!-- Share Panel -->
+    <section class="share-panel" aria-label="Share Vision in Motion">
+      <div class="share-headings">
+        <h2>Keep the conversation moving.</h2>
+        <p>Share Vision in Motion.</p>
+      </div>
+      <div class="share-actions">
+        <a id="share-linkedin" class="btn-linkedin" href="#" target="_blank" rel="noopener noreferrer">
+          Share on LinkedIn ↗
+        </a>
+        <button id="copy-page-link" class="btn-copy" type="button">Copy page link</button>
+      </div>
+      <div id="share-status" class="share-status-msg" role="status"></div>
+    </section>
+
+    <!-- Full Film Transcript -->
+    <details class="transcript-disclosure">
+      <summary class="transcript-summary">Read the film transcript</summary>
+      <div class="full-transcript-body">
+        <p><strong>Big questions. A clearer view of what comes next. This is Chooch AI.</strong></p>
+
+        <section>
+          <h3>What if your shelves could tell you what they need?</h3>
+          <p>Chooch AI turns shelf images into approximate inventory counts—using the shelves you already have, without barcode scans or RFID tags.</p>
+          <p>When stock runs low, replenishment signals follow. Real-time visibility replaces yesterday’s guesswork.</p>
+        </section>
+
+        <section>
+          <h3>Can visibility scale without compromising privacy?</h3>
+          <p>No patient data is captured; identifying features are blurred on-device. Chooch is HIPAA compliant, ISO and SOC 2 certified.</p>
+          <p>Gartner’s May 2026 report describes a rollout across seventeen hundred inventory rooms in forty-one hospitals.</p>
+        </section>
+
+        <section>
+          <h3>What if service meant availability—not just delivery?</h3>
+          <p>Picture demand based on actual use. Distributors can consolidate orders and plan fewer emergency deliveries.</p>
+          <p>Managed inventory can then reach hundreds of rooms without expanding manual counting teams.</p>
+        </section>
+
+        <section>
+          <h3>What could your teams do with time back?</h3>
+          <p>Reported deployments show up to fifty percent higher supply-chain productivity and up to forty-to-fifty percent less inventory.</p>
+          <p>Critical stockouts fall by up to ninety-five percent; expiration waste by around fifteen percent. Results vary by facility.</p>
+        </section>
+
+        <section>
+          <h3>Why wait for an empty shelf to sound the alarm?</h3>
+          <p>Resilience starts with knowing what you have. Live consumption trends warn of shortages before shelves empty—even overnight.</p>
+          <p>Teams can redistribute supplies, source alternatives and locate recalled products with a recorded audit trail.</p>
+        </section>
+
+        <section>
+          <h3>What changes when both sides see the same reality?</h3>
+          <p>Now the conversation changes: anticipate seasonal demand, agree on substitutes, and measure success by availability at the point of care.</p>
+          <p>Shared facts build trust—and a stronger basis for pricing and contract discussions.</p>
+        </section>
+
+        <section>
+          <h3>If inventory gets smarter, what stays in your hands?</h3>
+          <p>Your clinical routines, care decisions, ERP, purchasing contracts and approvals stay yours. Chooch feeds existing systems.</p>
+          <p>Supply-chain expertise shifts toward exceptions and planning. Less repetitive counting. More time for people.</p>
+        </section>
+
+        <p><em>The right supplies. The right place. The right time. Chooch AI. A healthier tomorrow.</em></p>
+      </div>
+    </details>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-brand">AI Vision. A Healthier Tomorrow.</div>
+      <div class="footer-disclaimer">
+        Animated illustrations. Performance figures are source-reported outcomes; results vary by facility.
+      </div>
+      <a class="footer-link" href="https://www.chooch.com/" target="_blank" rel="noopener noreferrer">
+        chooch.com ↗
+      </a>
+    </footer>
+  </main>
+
+  <div id="status" class="sr-only" role="status"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
